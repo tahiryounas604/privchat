@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PrivChat — no number, no email, encrypted</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<section id="auth-screen">
+  <h1>PrivChat</h1>
+  <p class="tagline">No phone number. No email. Just a username, a password,
+     and encryption keys that never leave this device.</p>
+
+  <div class="card">
+    <h2>Register</h2>
+    <label>Username <input id="reg-username" autocomplete="off"></label>
+    <label>Password <input id="reg-password" type="password"></label>
+    <button id="btn-register">Register (creates keys on this device)</button>
+    <p class="hint">Your private key is generated here and stored only in this
+       browser. If you clear browser storage, old messages can't be decrypted.</p>
+  </div>
+
+  <div class="card">
+    <h2>Login</h2>
+    <label>Username <input id="login-username" autocomplete="off"></label>
+    <label>Password <input id="login-password" type="password"></label>
+    <button id="btn-login">Login</button>
+  </div>
+
+  <p id="auth-error" class="error"></p>
+</section>
+
+<section id="chat-screen" hidden>
+  <header>
+    <strong id="me-label"></strong>
+    <span id="conn-label" class="conn">connecting…</span>
+    <button id="btn-logout">Logout</button>
+  </header>
+
+  <div id="layout">
+    <aside>
+      <h3>Contacts</h3>
+      <ul id="contacts"></ul>
+      <div class="add-contact">
+        <input id="new-contact" placeholder="add by username">
+        <button id="btn-add-contact">Add</button>
+      </div>
+      <p id="contact-error" class="error"></p>
+    </aside>
+
+    <main>
+      <div id="peer-bar">
+        <span id="peer-label">Pick a contact</span>
+        <span class="call-buttons">
+          <button id="btn-call-audio" disabled>📞 Audio</button>
+          <button id="btn-call-video" disabled>🎥 Video</button>
+        </span>
+      </div>
+      <div id="messages"></div>
+      <form id="send-form">
+        <input id="message-input" placeholder="Type an encrypted message…" disabled>
+        <button id="btn-send" disabled>Send</button>
+      </form>
+    </main>
+  </div>
+
+  <div id="call-panel" hidden>
+    <p id="call-status">Calling…</p>
+    <video id="remote-video" autoplay playsinline></video>
+    <video id="local-video" autoplay playsinline muted></video>
+    <div class="call-controls">
+      <button id="btn-accept" hidden>Accept</button>
+      <button id="btn-reject" hidden>Reject</button>
+      <button id="btn-mute" hidden>Mute</button>
+      <button id="btn-hangup" hidden>Hang up</button>
+    </div>
+  </div>
+</section>
+
+<script src="/app.js"></script>
+</body>
+</html>
